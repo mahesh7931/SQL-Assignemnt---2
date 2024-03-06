@@ -47,11 +47,12 @@ from film f join language l on f.language_id = l.language_id
 group by l.name;
 
 -- Question 12: Retrieve the customer names along with the total amount they've spent on rentals. 
-select concat(c.first_name, ' ', c.last_name) as Name, 
-sum(p.amount) as Total_amount from customer c 
-join payment p on c.customer_id = p.customer_id
-join rental r on c.customer_id = r.customer_id
-group by c.customer_id;
+select sum(p.amount) as Total_amount,
+concat(c.first_name, ' ', c.last_name) as Name 
+from customer c join payment p on c.customer_id = p.customer_id
+join rental r on p.rental_id=r.rental_id
+group by c.customer_id ;
+
 
 -- Question 12: List the titles of movies rented by each customer in a particular city (e.g., 'London').
 select concat(c.first_name, ' ', c.last_name) As Customer,f.title
